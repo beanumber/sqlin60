@@ -1,0 +1,107 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "SQL in 60",
+    "section": "",
+    "text": "hello"
+  },
+  {
+    "objectID": "sql-in-60.html#a-brief-primer-on-sql",
+    "href": "sql-in-60.html#a-brief-primer-on-sql",
+    "title": "SQL in 60 minutes",
+    "section": "A brief primer on SQL",
+    "text": "A brief primer on SQL\n\nhttps://en.wikipedia.org/wiki/SQL\n\n\n\n\n\n\nSQL is not just one thing\n\nMySQL, PostgreSQL, SQLite\nOracle, Big Query, Vertica\n\nTheory developed in 1970s (E.F. Codd)\nIngres implemented mid-1970s\nrobust, time-tested, well understood"
+  },
+  {
+    "objectID": "sql-in-60.html#well-be-using-mysql",
+    "href": "sql-in-60.html#well-be-using-mysql",
+    "title": "SQL in 60 minutes",
+    "section": "We’ll be using MySQL",
+    "text": "We’ll be using MySQL\n\nhttps://en.wikipedia.org/wiki/MySQL\n\n\n\n\n\n\nArguably the most popular RDBMS\nopen source\n\nSee also: PostgreSQL, SQLite\n\nbought by Sun in 2008, now owned by Oracle\nMariaDB is GPL-only fork"
+  },
+  {
+    "objectID": "sql-in-60.html#the-thing-about-sql-is",
+    "href": "sql-in-60.html#the-thing-about-sql-is",
+    "title": "SQL in 60 minutes",
+    "section": "The thing about SQL is…",
+    "text": "The thing about SQL is…\n\n\n\nSince you know\n\n\n\n\nYou already know SQL!"
+  },
+  {
+    "objectID": "sql-in-60.html#same-concepts-different-syntax",
+    "href": "sql-in-60.html#same-concepts-different-syntax",
+    "title": "SQL in 60 minutes",
+    "section": "Same concepts, different syntax",
+    "text": "Same concepts, different syntax\n\n\ndplyr\n\ntable |>\n  filter(field == \"value\") |>\n  left_join(lkup, \n    by = c(\"lkup_id\" = \"id\") |>\n  group_by(year) |>\n  summarize(\n    num_rows = n()\n  ) |>\n  filter(N > 100) |>\n  arrange(desc(N)) |>\n  head(10)\n\n\nMySQL\n\nSELECT\n  year, \n  COUNT(*) AS num_rows\nFROM table AS t\nLEFT JOIN lkup  AS l\n  ON t.lkup_id = l.id\nWHERE field = \"value\"\nGROUP BY year\nHAVING N > 100\nORDER BY N desc\nLIMIT 0, 10;"
+  },
+  {
+    "objectID": "sql-in-60.html#why",
+    "href": "sql-in-60.html#why",
+    "title": "SQL in 60 minutes",
+    "section": "Why?",
+    "text": "Why?\n\n\nYou may have learned dplyr first, but…\nSQL came first\nand it’s more widely-used"
+  },
+  {
+    "objectID": "sql-in-60.html#why-dplyr-vs.-sql",
+    "href": "sql-in-60.html#why-dplyr-vs.-sql",
+    "title": "SQL in 60 minutes",
+    "section": "Why dplyr vs. SQL?",
+    "text": "Why dplyr vs. SQL?\n\n\nR + dplyr good at:\n\nfitting models\nplotting\nwrangling data of all kinds\nworking with small data\nbeing an interface to SQL\n\n\nSQL good at:\n\nstorage and retrieval\nmedium-to-big data\nmulti-user, asynchronous access\nserving institutional needs\nweb/mobile apps"
+  },
+  {
+    "objectID": "sql-in-60.html#dbeaver",
+    "href": "sql-in-60.html#dbeaver",
+    "title": "SQL in 60 minutes",
+    "section": "DBeaver",
+    "text": "DBeaver\n\nhttps://dbeaver.io/"
+  },
+  {
+    "objectID": "sql-in-60.html#connect-to-scidb",
+    "href": "sql-in-60.html#connect-to-scidb",
+    "title": "SQL in 60 minutes",
+    "section": "Connect to scidb",
+    "text": "Connect to scidb\n\n\n\nPW: DSismfc@S"
+  },
+  {
+    "objectID": "sql-in-60.html#people-in-the-imdb",
+    "href": "sql-in-60.html#people-in-the-imdb",
+    "title": "SQL in 60 minutes",
+    "section": "People in the IMDB",
+    "text": "People in the IMDB\n\nhttps://en.wikipedia.org/wiki/Primary_key\n\n\nname: people and their names\n\nid column is primary key\n\nperson_id column references name.id from:\n\nperson_info\ncast_info\naka_name"
+  },
+  {
+    "objectID": "sql-in-60.html#movies-in-the-imdb",
+    "href": "sql-in-60.html#movies-in-the-imdb",
+    "title": "SQL in 60 minutes",
+    "section": "Movies in the IMDB",
+    "text": "Movies in the IMDB\n\ntitle: movies and their titles\n\nid column is primary key\n\nmovie_id column references title.id from:\n\ncast_info\naka_title\nmovie_companies\nmovie_info\nmovie_info_idx\nmovie_keyword\nmovie_link"
+  },
+  {
+    "objectID": "sql-in-60.html#section",
+    "href": "sql-in-60.html#section",
+    "title": "SQL in 60 minutes",
+    "section": "",
+    "text": "https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model"
+  },
+  {
+    "objectID": "sql-in-60.html#practice-1",
+    "href": "sql-in-60.html#practice-1",
+    "title": "SQL in 60 minutes",
+    "section": "Practice 1",
+    "text": "Practice 1\n\n\nFind Viola Davis’s id in the name table.\nFind all the rows in cast_info that correspond to Viola Davis as an actress.\nAdd the names of the characters she played to the list of Viola Davis’s roles from the previous exercise.\nFind Viola Davis’s full filmography, in chronological order. Include each movie’s title, production_year, and the name of the character that she played."
+  },
+  {
+    "objectID": "sql-in-60.html#practice-2",
+    "href": "sql-in-60.html#practice-2",
+    "title": "SQL in 60 minutes",
+    "section": "Practice 2",
+    "text": "Practice 2\n\nList all movies that have Spike Lee as a director.\nList Alfre Woodard’s complete filmography. Include the columns Year, Title, and Role (like on the linked Wikipedia page).\nHow many times has Sean Connery played James Bond?\nList all of the actors who have played James Bond and how many times they have done so."
+  },
+  {
+    "objectID": "sql-in-60.html#learn-more",
+    "href": "sql-in-60.html#learn-more",
+    "title": "SQL in 60 minutes",
+    "section": "Learn more",
+    "text": "Learn more\n\nSELECT documentation\nMany online tutorials…\nPractice!\n\n\n\n\nhttps://beanumber.github.io/sqlin60/"
+  }
+]
