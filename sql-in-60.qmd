@@ -14,7 +14,6 @@ format:
 ---
 
 ```{r setup, include=FALSE}
-library(tidyverse)
 ```
 
 
@@ -85,11 +84,11 @@ library(tidyverse)
 
 :::: {.columns}
 
-::: {.column width="50%"}
+::: {.column width="30%"}
 
 ::: {.fragment .fade-right}
 
-Since you already know 
+Since you know 
 
 ![](http://hexb.in/hexagons/dplyr.png)
 
@@ -98,7 +97,7 @@ Since you already know
 :::
 
 
-::: {.column width="50%"}
+::: {.column width="70%"}
 
 
 ::: {.fragment .fade-up}
@@ -131,7 +130,9 @@ table |>
   left_join(lkup, 
     by = c("lkup_id" = "id") |>
   group_by(year) |>
-  summarize(num_rows = n()) |>
+  summarize(
+    num_rows = n()
+  ) |>
   filter(N > 100) |>
   arrange(desc(N)) |>
   head(10)
@@ -147,7 +148,8 @@ MySQL
 #| eval: false
 #| echo: true
 SELECT
-  year, COUNT(*) AS num_rows
+  year, 
+  COUNT(*) AS num_rows
 FROM table AS t
 LEFT JOIN lkup  AS l
   ON t.lkup_id = l.id
@@ -164,10 +166,13 @@ LIMIT 0, 10;
 
 ## Why?
 
-- You may have learned `dplyr` first, but...
-    - SQL came first
-    - and it's more widely-used
+::: incremental
 
+- You may have learned `dplyr` first, but...
+- SQL came first
+- and it's more widely-used
+
+:::
 
 ## Why `dplyr` vs. SQL?
 
@@ -276,7 +281,7 @@ SQL good at:
 
 :::
 
-## Demo
+# Demo
 
 ## Practice 1
 
@@ -301,3 +306,11 @@ SQL good at:
 - How many times has Sean Connery [played James Bond](https://en.wikipedia.org/wiki/Portrayal_of_James_Bond_in_film)?
 
 - List all of the actors who have played James Bond and how many times they have done so.
+
+## Learn more
+
+- [`SELECT` documentation](https://dev.mysql.com/doc/refman/8.0/en/select.html)
+
+- Many online tutorials...
+
+- Practice!
