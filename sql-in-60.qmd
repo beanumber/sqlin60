@@ -1,0 +1,303 @@
+---
+title: "SQL in 60 minutes"
+subtitle: "Student Workshop"
+author: "Ben Baumer"
+date: 2022-11-08
+format:
+  revealjs: 
+    slide-number: true
+    chalkboard: 
+      buttons: false
+    preview-links: auto
+    logo: https://github.com/SmithCollege-SDS/sds/raw/master/man/figures/logo.png
+    footer: https://beanumber.github.io/sqlin60/
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+```
+
+
+# SQL
+
+## A brief primer on SQL 
+
+::: footer
+
+<https://en.wikipedia.org/wiki/SQL>
+:::
+
+:::: {.columns}
+
+::: {.column width="40%"}
+![](http://www.freeiconspng.com/uploads/sql-file-icon-0.png)
+:::
+
+::: {.column width="60%"}
+- SQL is not just one thing
+    - MySQL, PostgreSQL, SQLite
+    - Oracle, Big Query, Vertica
+
+- Theory developed in 1970s (E.F. Codd)
+
+- Ingres implemented mid-1970s
+
+- robust, time-tested, well understood
+:::
+
+::::
+
+
+
+## We'll be using MySQL
+
+::: footer
+
+<https://en.wikipedia.org/wiki/MySQL>
+
+:::
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+![](https://www.freepnglogos.com/uploads/logo-mysql-png/logo-mysql-mysql-logo-png-images-are-download-crazypng-21.png)
+
+:::
+
+::: {.column width="60%"}
+
+- Arguably the most popular RDBMS
+
+- open source
+    - See also: [PostgreSQL](https://en.wikipedia.org/wiki/PostgreSQL), [SQLite](https://en.wikipedia.org/wiki/SQLite)
+
+- bought by Sun in 2008, now owned by Oracle
+
+- [MariaDB](https://en.wikipedia.org/wiki/MariaDB) is GPL-only fork
+
+:::
+
+::::
+
+## The thing about SQL is...
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+::: {.fragment .fade-right}
+
+Since you already know 
+
+![](http://hexb.in/hexagons/dplyr.png)
+
+:::
+
+:::
+
+
+::: {.column width="50%"}
+
+
+::: {.fragment .fade-up}
+
+You **already** know SQL!
+
+![](https://cdn1.vectorstock.com/i/1000x1000/77/30/sql-database-icon-logo-design-ui-or-ux-app-vector-17507730.jpg)
+
+
+:::
+
+:::
+
+::::
+
+
+## Same concepts, different syntax
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+dplyr
+
+```{r}
+#| eval: false
+#| echo: true
+table |>
+  filter(field == "value") |>
+  left_join(lkup, 
+    by = c("lkup_id" = "id") |>
+  group_by(year) |>
+  summarize(num_rows = n()) |>
+  filter(N > 100) |>
+  arrange(desc(N)) |>
+  head(10)
+```
+
+:::
+
+::: {.column width="50%"}
+
+MySQL
+
+```{sql}
+#| eval: false
+#| echo: true
+SELECT
+  year, COUNT(*) AS num_rows
+FROM table AS t
+LEFT JOIN lkup  AS l
+  ON t.lkup_id = l.id
+WHERE field = "value"
+GROUP BY year
+HAVING N > 100
+ORDER BY N desc
+LIMIT 0, 10;
+```
+
+:::
+
+::::
+
+## Why?
+
+- You may have learned `dplyr` first, but...
+    - SQL came first
+    - and it's more widely-used
+
+
+## Why `dplyr` vs. SQL?
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+R + `dplyr` good at:
+
+- fitting models
+
+- plotting
+
+- wrangling data of all kinds
+
+- working with small data
+
+- being an **interface to SQL**
+
+:::
+
+::: {.column width="50%"}
+
+SQL good at:
+
+- storage and retrieval
+
+- medium-to-big data
+
+- multi-user, asynchronous access
+
+- serving institutional needs
+
+- web/mobile apps
+
+:::
+
+::::
+
+# Connecting
+
+## DBeaver
+
+::: footer
+
+<https://dbeaver.io/>
+
+:::
+
+![](https://dbeaver.io/wp-content/uploads/2018/03/administration.png)
+
+## Connect to `scidb`
+
+:::: {.columns}
+
+::: {.column width="30%"}
+
+- PW: `DSismfc@S`
+
+:::
+
+::: {.column width="70%"}
+
+![](settings.png)
+
+:::
+
+::::
+
+# IMDB
+
+## People in the IMDB
+
+::: footer
+
+<https://en.wikipedia.org/wiki/Primary_key>
+
+:::
+
+
+- `name`: people and their names
+    - `id` column is **primary key**
+- `person_id` column references `name.id` from:
+    - `person_info`
+    - `cast_info`
+    - `aka_name`
+
+## Movies in the IMDB
+
+- `title`: movies and their titles
+    - `id` column is primary key
+- `movie_id` column references `title.id` from:
+    - `cast_info`
+    - `aka_title`
+    - `movie_companies`
+    - `movie_info`
+    - `movie_info_idx`
+    - `movie_keyword`
+    - `movie_link`
+
+## {background-image="https://i.imgur.com/pDq0n.png" background-size="contain"}
+
+::: footer
+
+<https://en.wikipedia.org/wiki/Entity%E2%80%93relationship_model>
+
+:::
+
+## Demo
+
+## Practice 1
+
+::: incremental
+
+- Find [Viola Davis](http://www.imdb.com/name/nm0205626/?ref_=nv_sr_1)’s id in the name table.
+
+- Find all the rows in `cast_info` that correspond to Viola Davis as an actress.
+
+- Add the names of the characters she played to the list of Viola Davis’s roles from the previous exercise.
+
+- Find Viola Davis’s full filmography, in chronological order. Include each movie’s `title`, `production_year`, and the name of the character that she played.
+
+:::
+
+## Practice 2
+
+- List all movies that have [Spike Lee](https://en.wikipedia.org/wiki/Spike_Lee) as a director.
+
+- List [Alfre Woodard](https://en.wikipedia.org/wiki/Alfre_Woodard)’s complete filmography. Include the columns Year, Title, and Role (like on the linked Wikipedia page).
+
+- How many times has Sean Connery [played James Bond](https://en.wikipedia.org/wiki/Portrayal_of_James_Bond_in_film)?
+
+- List all of the actors who have played James Bond and how many times they have done so.

@@ -1,0 +1,36 @@
+project:
+  type: website
+  output-dir: "docs"
+
+website:
+  reader-mode: true
+  title: "SQL in 60"
+  site-url: "https://beanumber.github.io/sqlin60"
+  sidebar:
+    style: "docked"
+    background: primary
+    search: true
+    contents:
+      - section: "Course Info"
+        contents:
+        - href: index.qmd
+          text: Home
+        - href: sql-in-60.qmd
+          text: Slides
+
+  repo-url: https://github.com/beanumber/sqlin60
+  repo-actions: [edit, issue]
+  page-footer: 
+    left: "Created by Benjamin Baumer." 
+    right: 
+      - icon: github
+        href: https://github.com/beanumber/sqlin60
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+
+
+
